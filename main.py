@@ -13,5 +13,6 @@ website_html = response.text
 soup = BeautifulSoup(website_html, "html.parser")
 
 # Find the amount element
-price_span = soup.find(name="span", class_="apexPriceToPay")
-print(f"Got the response: {price_span.getText()}")
+parent_price_span = soup.find(name="span", class_="apexPriceToPay")
+price_span = parent_price_span.find(name="span", class_="a-offscreen")
+amount = float(price_span.getText().replace("₹", ""))
